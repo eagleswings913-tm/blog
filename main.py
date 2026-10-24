@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, url_for, request
 from post import Post
 import requests
 
@@ -34,6 +34,14 @@ def show_post(index):
     image_url = url_for('static', filename=image_path)
     print(image_url)
     return render_template("post.html", post=requested_post, image_url=image_url)
+
+@app.route('/form_entry', methods=['POST'])
+def receive_data():
+    name = request.form["name"]
+    email = request.form["email"]
+    phone = request.form["phone"]
+    message = request.form["message"]
+    return f"name = {name}, email = {email}, phone = {phone}, message = {message}"
 
 if __name__ == "__main__":
     app.run(debug=True)
