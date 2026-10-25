@@ -19,9 +19,17 @@ def home():
 def about():
     return render_template('about.html')
 
-@app.route('/contact')
+@app.route('/contact', methods=['GET', 'POST'])
 def contact():
-    return render_template('contact.html')
+    if request.method == 'POST':
+        # name = request.form["name"]
+        # email = request.form["email"]
+        # phone = request.form["phone"]
+        # message = request.form["message"]
+        # return f"name = {name}, email = {email}, phone = {phone}, message = {message}"
+        return render_template('contact.html', sent_successfully=True)
+    else:
+        return render_template('contact.html', sent_successfully=False)
 
 @app.route('/post/<int:index>')
 def show_post(index):
